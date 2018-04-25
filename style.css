@@ -1,0 +1,81 @@
+html{
+	overflow-y: hidden;
+	height:100%;
+}
+body {
+	margin: 2%;
+}
+div#contents {
+	height: 98%;
+	border: black solid 1px;
+}
+#menu div a:not(#calc){
+	border: black solid 1px;
+	margin: 1%;
+	height: 6%;
+	width: 47%;
+	text-align: center;
+}
+#parents_setting,#search_range {
+	float: left;
+	border: black solid 1px;
+}
+#filter_setting,#others {
+	float: right;
+}
+div[id="menu2"]:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+#calc {
+	border: black solid 1px;
+	text-align: center;
+	margin: 0 45%;
+	width: 30%;
+}
+#main > div {
+	display: none;
+	margin: 1%;
+	height: 80%;
+}
+#main > div:target {
+	display: block;
+}
+#parents_data > div > div:not([style]) {
+	display:block;
+	float: left;
+}
+#parents_data > div > div > span {
+	text-align: center;
+	display: block;
+}
+
+#parents_data > div:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+#statusFilter > span {
+	display:block;
+}
+#statusFilter {
+	float: left;
+}
+#otherFilter > span {
+	display:block;
+}
+#otherFilter {
+	float: right;
+}
+#filter_data > div:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+#range_config > span {
+	display:block;
+}
+#other_config > span {
+	display:block;
+}

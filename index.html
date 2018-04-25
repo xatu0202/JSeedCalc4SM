@@ -1,0 +1,282 @@
+﻿<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SM孵化リスト生成ツール（WEB版）</title>
+    <script src="TinyMT.js"></script>
+    <script src="db.js"></script>
+    <script src="script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="contents">
+      <div id="menu">
+        <div id="menu1">
+         <a id="parents_setting" href="#parents_data">親の情報</a>
+         <a id="filter_setting" href="#filter_data">フィルター</a>
+        </div>
+        <div id="menu2">
+          <a id="search_range" href="#range_config">検索範囲</a>
+          <a id="others" href="#other_config">その他</a>
+        </div>
+        <div><a id="calc" href="#result">計算</a></div>
+      </div>
+      <div id="main">
+        <div id="parents_data">
+          親の設定<hr>
+          <div id="m_parent">
+            <div style="display: block;color: dodgerblue;">
+              ♂親
+              持ち物:
+              <select>
+                <option value="0">道具なし</option>
+                <option value="1">かわらずのいし</option>
+                <option value="2">あかいいと</option>
+              </select>
+              特性:
+              <select>
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">夢</option>
+              </select>
+            </div>
+            <div id="mH">
+              <span>H</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="mA">
+              <span>A</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="mB">
+              <span>B</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="mC">
+              <span>C</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="mD">
+              <span>D</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="mS">
+              <span>S</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            メタモン<input type="checkbox" id="mM"></input>
+          </div>
+          <hr>
+          <div id="f_parent">
+            <div style="display: block;color: coral;">
+              ♀親
+              持ち物:
+              <select>
+                <option value="0">道具なし</option>
+                <option value="1">かわらずのいし</option>
+                <option value="2">あかいいと</option>
+              </select>
+              特性:
+              <select>
+                <option value="0">1</option>
+                <option value="1">2</option>
+                <option value="2">夢</option>
+              </select>
+            </div>
+            <div id="fH">
+              <span>H</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="fA">
+              <span>A</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="fB">
+              <span>B</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="fC">
+              <span>C</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="fD">
+              <span>D</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            <div id="fS">
+              <span>S</span>
+              <input type="number" max="31" min="0" step="1" value="31"></input>
+            </div>
+            メタモン<input type="checkbox" id="fM"></input>
+          </div>
+          <hr>
+          異種間孵化<input type="checkbox" id="ignoreBall"></input>
+          <span style="float: right;">性別比：
+          <select id="genderRate">
+            <option value="126">♂：♀=1:1</option>
+            <option value="30">♂：♀=7:1</option>
+            <option value="♂">♂のみ</option>
+            <option value="♀">♀のみ</option>
+            <option value="-">無性別</option>
+          </select>
+          </span><span style="clear:both;"></span>
+        </div>
+        <div id="filter_data">
+          フィルター設定<hr>
+          <div>
+            <div id="statusFilter">
+              <span>H <input type="number" max="31" min="0" step="1" value="0"></input> ～ <input type="number" max="31" min="0" step="1" value="31"></input></span>
+              <span>A <input type="number" max="31" min="0" step="1" value="0"></input> ～ <input type="number" max="31" min="0" step="1" value="31"></input></span>
+              <span>B <input type="number" max="31" min="0" step="1" value="0"></input> ～ <input type="number" max="31" min="0" step="1" value="31"></input></span>
+              <span>C <input type="number" max="31" min="0" step="1" value="0"></input> ～ <input type="number" max="31" min="0" step="1" value="31"></input></span>
+              <span>D <input type="number" max="31" min="0" step="1" value="0"></input> ～ <input type="number" max="31" min="0" step="1" value="31"></input></span>
+              <span>S <input type="number" max="31" min="0" step="1" value="0"></input> ～ <input type="number" max="31" min="0" step="1" value="31"></input></span>
+            </div>
+            <div id="otherFilter">
+              <span>性格
+                <select>
+                  <option value="false">指定なし</option>
+                  <option>がんばりや</option>
+                  <option>さみしがり</option>
+                  <option>ゆうかん</option>
+                  <option>いじっぱり</option>
+                  <option>やんちゃ</option>
+                  <option>ずぶとい</option>
+                  <option>すなお</option>
+                  <option>のんき</option>
+                  <option>わんぱく</option>
+                  <option>のうてんき</option>
+                  <option>おくびょう</option>
+                  <option>せっかち</option>
+                  <option>まじめ</option>
+                  <option>ようき</option>
+                  <option>むじゃき</option>
+                  <option>ひかえめ</option>
+                  <option>おっとり</option>
+                  <option>れいせい</option>
+                  <option>てれや</option>
+                  <option>うっかりや</option>
+                  <option>おだやか</option>
+                  <option>おとなしい</option>
+                  <option>なまいき</option>
+                  <option>しんちょう</option>
+                  <option>きまぐれ</option>
+                </select>
+              </span>
+              <span>特性<select><option value="false">指定なし</option><option>1</option><option>2</option><option>夢</option></select></span>
+              <span>性別<select><option value="false">指定なし</option><option>♂</option><option>♀</option></select></span>
+              <span>ボール<select><option value="false">指定なし</option><option>先</option><option>後</option></select></span>
+            </div>
+          </div>
+        </div>
+        <div id="range_config">
+          検索範囲<hr>
+          <span>seed<input type="text"></input><button onclick="seedSet()">入力</button></span>
+          <span>status[3] 0x<input type="text"></input></span>
+          <span>status[2] 0x<input type="text"></input></span>
+          <span>status[1] 0x<input type="text"></input></span>
+          <span>status[0] 0x<input type="text"></input></span>
+          <hr>
+          <span>消費数</span>
+          
+          <span><input type="number" max="50000" min="0" step="1" value="0"></input> ～ <input type="number" max="100000" min="0" step="1" value="100"></input></span>
+        </div>
+        <div id="other_config">
+          その他<hr>
+          <span>国際孵化<input type="checkbox" id="PID6"></span>
+          <span>光るお守り<input type="checkbox" id="PID2"></span>
+        </div>
+        <div id="result"><textarea style="width:100%;height:100%;"></textarea></div>
+      </div>
+    </div>
+    <script>
+      document.getElementById("fM").onchange = function(){
+      if(document.getElementById("fM").checked)document.getElementById("ignoreBall").checked = true;
+        document.getElementById("mM").checked=false;
+      }
+      document.getElementById("mM").onchange = function(){
+        if(document.getElementById("mM").checked)document.getElementById("ignoreBall").checked = true;
+        document.getElementById("fM").checked=false;
+      }
+      document.getElementById("calc").onclick = function (){
+      
+        sType = "0";
+        if(isNaN(document.getElementById("genderRate").value))sType = document.getElementById("genderRate").value;
+        else sRate = Number(document.getElementById("genderRate").value);
+        bothParentsEverstone = (m_parent.getElementsByTagName("select")[0].value == 1) && (f_parent.getElementsByTagName("select")[0].value == 1);
+        isEver = (m_parent.getElementsByTagName("select")[0].value == 1) || (f_parent.getElementsByTagName("select")[0].value == 1);
+        abilityType = Number(f_parent.getElementsByTagName("select")[1].value);
+        if(f_parent.getElementsByTagName("input")[6].checked)abilityType = Number(m_parent.getElementsByTagName("select")[1].value);
+        mStatus = [];
+        fStatus = [];
+        if(f_parent.getElementsByTagName("input")[6].checked){
+          for(var i = 0; i < 6; i++){
+            mStatus[i] = Number(m_parent.getElementsByTagName("input")[i].value);
+            fStatus[i] = Number(f_parent.getElementsByTagName("input")[i].value);
+          }
+        }
+        else {
+          for(var i = 0; i < 6; i++){
+            mStatus[i] = Number(m_parent.getElementsByTagName("input")[i].value);
+            fStatus[i] = Number(f_parent.getElementsByTagName("input")[i].value);
+          }
+        }
+        inherites = 3;
+        if((m_parent.getElementsByTagName("select")[0].value == 2) || (f_parent.getElementsByTagName("select")[0].value == 2)) inherites = 5;
+        rePID = 0;
+        if(document.getElementById("PID6").checked) rePID += 6;
+        if(document.getElementById("PID2").checked) rePID += 2;
+        isSameParent = true;
+        if(f_parent.getElementsByTagName("input")[6].checked||m_parent.getElementsByTagName("input")[6].checked||document.getElementById("ignoreBall").checked) isSameParent = false;
+        //作成
+        var temp = document.getElementById("range_config").getElementsByTagName("input");
+        if(temp[1].value + temp[2].value + temp[3].value + temp[4].value != ""){
+          rng.status = new Uint32Array([temp[1].value, temp[2].value, temp[3].value, temp[4].value]);
+          if(typeof(MTSeed) == "undefined" || MTSeed.start != rng.status + []){
+            var start = rng.status + [];
+            makeTable(300000);
+            MTSeed.start = start;
+          }
+        }
+        //作成終了
+        searchKeys = ["H","A","B","C","D","S"];
+        searchRangeMin = [];
+        searchRangeMax = [];
+        for(var i = 0; i < 6; i++){
+          searchRangeMin.push(Number(document.getElementById("statusFilter").getElementsByTagName("input")[i*2].value));
+          searchRangeMax.push(Number(document.getElementById("statusFilter").getElementsByTagName("input")[i*2+1].value));
+        }
+        var nature = document.getElementById("otherFilter").getElementsByTagName("select")[0].value;
+        var ability = document.getElementById("otherFilter").getElementsByTagName("select")[1].value;
+        var gender = document.getElementById("otherFilter").getElementsByTagName("select")[2].value;
+        var ball = document.getElementById("otherFilter").getElementsByTagName("select")[3].value;
+        if(nature!="false"){
+          searchKeys.push("nature");
+          searchRangeMin.push(nature);
+          searchRangeMax.push(nature);
+        }
+        if(ability!="false"){
+          searchKeys.push("ability");
+          searchRangeMin.push(ability);
+          searchRangeMax.push(ability);
+        }
+        if(gender!="false"){
+          searchKeys.push("gender");
+          searchRangeMin.push(gender);
+          searchRangeMax.push(gender);
+        }
+        if(ball!="false"){
+          searchKeys.push("ball");
+          searchRangeMin.push(ball);
+          searchRangeMax.push(ball);
+        }
+          searchKeys.push("no");
+          searchRangeMin.push(0);
+          searchRangeMax.push(50000);
+        if(true){
+          exec(function(){sortDBRange(searchKeys,0,searchRangeMin,searchRangeMax)});
+        }
+      }
+    </script>
+  </body>
+</html>
